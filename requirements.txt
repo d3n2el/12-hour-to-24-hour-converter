@@ -1,0 +1,1 @@
+Nothing. Just run the program however you want(reccomend vscode) with py or python 
