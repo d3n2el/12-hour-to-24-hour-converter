@@ -16,14 +16,23 @@ def convert(s):
         raise ValueError
     match_am= match_am.group()
     match_pm= match_pm.group()
-    find_am= re.search(r"^AM$", mathc_am)
-    find_pm= re.search(r"^PM$", mathc_pm)
+    find_am= re.search(r"^AM$", match_am)
+    find_pm= re.search(r"^PM$", match_pm)
     if find_am and find_pm:
         results_am= re.split(r"\s", match_am)
         results_pm= re.split(r"\s", match_pm)
-        final_pm= int(results_pm[0])+ 12
-        result_am = int(results_am[0])
-        return f"{result_am:02d}:00 to {final_pm:02d}:00"
+        if ":" in match_am:
+            hours_am, minutes_am= re.split(r":",results_am[0])
+            final_am = f"{int(hours_am)}:{int(minutes_am)}"
+        else:
+            final_am = int(results_am[0])
+        if ":" in match_pm:
+            hours_pm, minutes_pm = re.split(r":", results_pm[0])
+            final_pm = f"{int(hours_pm)+12}:{int(minutes_pm)}"
+        else:
+            final_pm= int(results_pm[0])+ 12
+
+        return f"{final_am:02d}:00 to {final_pm:02d}:00"
 
 
 
