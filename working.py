@@ -22,20 +22,16 @@ def convert(s):
     hours_pm = int(hours_pm)
     if hours_am >= 13 or minutes_am >= 60 or minutes_pm >= 60 or hours_pm >= 13:
         raise ValueError
-    if period_am.upper() == "AM":
+    if period_am.upper() == "AM" or period_pm.upper == "AM":
          hours_am = 0 if hours_am == 12 else hours_am
-    else:
          hours_pm = 12 if hours_pm == 12 else hours_pm+12
-    if period_pm.upper() == "AM":
-         hours_am = 0 if hours_am == 12 else hours_am
     else:
-         hours_pm = 12 if hours_pm == 12 else hours_pm+12
+        hours_am = 12 if hours_am == 12 else hours_am+12
+        hours_pm = 0 if hours_pm == 12 else hours_pm
     final_am = f"{hours_am:02d}:{int(minutes_am):02d}"
     final_pm = f"{hours_pm:02d}:{minutes_pm:02d}"
-    if period_am.upper() == "AM":
-        return f"{final_am} to {final_pm}"
-    else:
-        return f"{final_pm} to {final_am}"
+    return f"{final_am} to {final_pm}"
+
 
 
 
